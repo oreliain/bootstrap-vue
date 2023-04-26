@@ -5,9 +5,12 @@
 .vscode/
 coverage/
 coverage-vue3/
-dist/
+# dist/
 docs-dist/
-esm/
+# esm/
+static
+scripts
+tests
 node_modules/
 *.iml
 *.log
