@@ -42,8 +42,8 @@ $b-custom-switch-indicator-size-sm: calc(
 // Custom file sizes
 $b-custom-file-font-size-lg: $input-font-size-lg !default;
 $b-custom-file-font-size-sm: $input-font-size-sm !default;
-$b-custom-file-line-height-lg: $input-line-height-lg !default;
-$b-custom-file-line-height-sm: $input-line-height-sm !default;
+$b-custom-file-line-height-lg: $btn-line-height !default;
+$b-custom-file-line-height-sm: $input-line-height !default;
 $b-custom-file-height-lg: $input-height-lg !default;
 $b-custom-file-height-sm: $input-height-sm !default;
 $b-custom-file-border-radius-lg: $input-border-radius-lg !default;
@@ -113,7 +113,7 @@ $b-table-stacked-gap: 1rem !default;
 
 // Bootstrap v4.3 is missing the "active" variant for dark tables
 // Which translates to `bg-active`, but only for tables
-$table-dark-active-bg: $table-dark-hover-bg !default;
+$table-dark-active-bg: $table-hover-bg !default;
 
 // --- Toasts ---
 
@@ -130,7 +130,6 @@ $b-toaster-offset-right: $b-toaster-offset-top !default;
 // Bootstrap does not have this as a variable, so we add it in.
 $b-toast-background-opacity: alpha($toast-background-color) !default;
 
-// Toast variant levels wrt theme color value
 $b-toast-bg-level: $alert-bg-level !default;
 $b-toast-border-level: $alert-border-level !default;
 $b-toast-color-level: $alert-color-level !default;

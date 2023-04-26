@@ -71,9 +71,9 @@
 @each $color, $value in $theme-colors {
   .b-toast-#{$color} {
     @include b-toast-variant(
-      theme-color-level($color, $b-toast-bg-level),
-      theme-color-level($color, $b-toast-border-level),
-      theme-color-level($color, $b-toast-color-level)
+      shift-color($value, $b-toast-bg-level),
+      shift-color($value, $b-toast-border-level),
+      shift-color($value, $b-toast-color-level)
     );
   }
 }

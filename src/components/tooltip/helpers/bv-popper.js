@@ -5,7 +5,7 @@
 //   Templates are only instantiated when shown, and destroyed when hidden
 //
 
-import Popper from 'popper.js'
+import { createPopper } from 'popper.js'
 import { extend } from '../../../vue'
 import { NAME_POPPER } from '../../../constants/components'
 import {
@@ -206,7 +206,7 @@ export const BVPopper = /*#__PURE__*/ extend({
       this.destroyPopper()
       // We use `el` rather than `this.$el` just in case the original
       // mountpoint root element type was changed by the template
-      this.$_popper = new Popper(this.target, el, this.popperConfig)
+      this.$_popper = createPopper(this.target, el, this.popperConfig)
     },
     destroyPopper() {
       this.$_popper && this.$_popper.destroy()

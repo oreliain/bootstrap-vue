@@ -35,8 +35,8 @@
 @if $bv-enable-tooltip-variants {
   @each $variant, $value in $theme-colors {
     .tooltip.b-tooltip-#{$variant} {
-      $tip-bg-color: theme-color-level($variant, $b-tooltip-bg-level);
-      $tip-text-color: color-yiq($tip-bg-color);
+      $tip-bg-color: shift-color($value, $b-tooltip-bg-level);
+      $tip-text-color: color-contrast($tip-bg-color);
 
       &.bs-tooltip-top {
         .arrow::before {

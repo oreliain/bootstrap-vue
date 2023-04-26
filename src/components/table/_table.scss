@@ -76,11 +76,11 @@
   &.table-hover.table-dark > tbody > tr.bg-active:hover {
     td,
     th {
-      color: $table-dark-hover-color;
+      color: $table-hover-color;
       // `$table-dark-hover-bg` default is a very transparent white
       // We overlay it over the background color to achieve the
       // same color effect while keeping the background solid
-      background-image: linear-gradient($table-dark-hover-bg, $table-dark-hover-bg);
+      background-image: linear-gradient($table-hover-bg, $table-hover-bg);
       background-repeat: no-repeat;
     }
   }
@@ -236,11 +236,11 @@
 
         &.table-dark {
           > tbody > tr:hover > .bg-b-table-default {
-            color: $table-dark-hover-color;
+            color: $table-hover-color;
             // `$table-dark-hover-bg` default is a very transparent white
             // We overlay it over the background color to achieve the same color
             // effect while keeping the background solid.
-            background-image: linear-gradient($table-dark-hover-bg, $table-dark-hover-bg);
+            background-image: linear-gradient($table-hover-bg, $table-hover-bg);
             background-repeat: no-repeat;
           }
         }
