@@ -12,7 +12,7 @@ import { hasNormalizedSlot, normalizeSlot } from '../../utils/normalize-slot'
 export const props = makePropsConfigurable(
   {
     ariaLabel: makeProp(PROP_TYPE_STRING, 'Close'),
-    content: makeProp(PROP_TYPE_STRING, '&times;'),
+    content: makeProp(PROP_TYPE_STRING, ''),
     disabled: makeProp(PROP_TYPE_BOOLEAN, false),
     textVariant: makeProp(PROP_TYPE_STRING)
   },
@@ -31,7 +31,7 @@ export const BButtonClose = /*#__PURE__*/ extend({
     const $scopedSlots = scopedSlots || {}
 
     const componentData = {
-      staticClass: 'close',
+      staticClass: 'btn-close',
       class: {
         [`text-${props.textVariant}`]: props.textVariant
       },

@@ -5,7 +5,7 @@
 //   Templates are only instantiated when shown, and destroyed when hidden
 //
 
-import { createPopper } from 'popper.js'
+import { createPopper } from '@popperjs/core'
 import { extend } from '../../../vue'
 import { NAME_POPPER } from '../../../constants/components'
 import {
@@ -105,27 +105,44 @@ export const BVPopper = /*#__PURE__*/ extend({
       const { placement } = this
       return {
         placement: this.getAttachment(placement),
-        modifiers: {
-          offset: { offset: this.getOffset(placement) },
-          flip: { behavior: this.fallbackPlacement },
-          // `arrow.element` can also be a reference to an HTML Element
-          // maybe we should make this a `$ref` in the templates?
-          arrow: { element: '.arrow' },
-          preventOverflow: {
-            padding: this.boundaryPadding,
-            boundariesElement: this.boundary
+        modifiers: [
+          {
+            name: 'offset',
+            enabled: true,
+            options: { offset: this.getOffset(placement) }
+          },
+          {
+            name: 'flip',
+            enabled: true,
+            options: { fallbackPlacement: this.fallbackPlacement }
+          },
+          {
+            name: 'arrow',
+            enabled: true,
+            options: { element: '.arrow' }
+          },
+          {
+            name: 'preventOverflow',
+            options: {
+              padding: this.boundaryPadding,
+              boundary: this.boundary
+            }
+          },
+          {
+            name: 'customOnUpdate',
+            enabled: true,
+            phase: 'afterWrite',
+            fn: ({ state }) => {
+              this.popperPlacementChange(state)
+            }
           }
-        },
-        onCreate: data => {
+        ],
+        onFirstUpdate: data => {
           // Handle flipping arrow classes
           if (data.originalPlacement !== data.placement) {
             /* istanbul ignore next: can't test in JSDOM */
             this.popperPlacementChange(data)
           }
-        },
-        onUpdate: data => {
-          // Handle flipping arrow classes
-          this.popperPlacementChange(data)
         }
       }
     }
@@ -213,7 +230,7 @@ export const BVPopper = /*#__PURE__*/ extend({
       this.$_popper = null
     },
     updatePopper() {
-      this.$_popper && this.$_popper.scheduleUpdate()
+      this.$_popper && this.$_popper.update()
     },
     popperPlacementChange(data) {
       // Callback used by popper to adjust the arrow placement

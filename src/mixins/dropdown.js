@@ -1,4 +1,4 @@
-import { createPopper } from 'popper.js'
+import { createPopper } from '@popperjs/core'
 import { extend } from '../vue'
 import { NAME_DROPDOWN } from '../constants/components'
 import { HAS_TOUCH_SUPPORT } from '../constants/env'
@@ -256,7 +256,7 @@ export const dropdownMixin = extend({
     // useful if the content changes size
     updatePopper() {
       try {
-        this.$_popper.scheduleUpdate()
+        this.$_popper.update()
       } catch {}
     },
     clearHideTimeout() {

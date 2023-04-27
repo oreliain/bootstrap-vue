@@ -75,7 +75,7 @@ export const bootstrapIconsVersionMinor = bootstrapIconsVersion.replace(minorRE,
 export const bootstrapIconsVersionMajor = bootstrapIconsVersion.replace(majorRE, '$1')
 export const bootstrapIconsCount = 1200
 
-export const popperVersion = parseVersion(dependencies['popper.js'])
+export const popperVersion = parseVersion(dependencies['@popperjs/core'])
 export const popperVersionMinor = popperVersion.replace(minorRE, '$1')
 export const popperVersionMajor = popperVersion.replace(majorRE, '$1')
 
