@@ -11,6 +11,7 @@
 .b-custom-control-lg,
 .input-group-lg {
   &.custom-file,
+  &.form-file,
   .custom-file-input,
   .custom-file-label {
     font-size: $b-custom-file-font-size-lg;
@@ -37,6 +38,7 @@
 .b-custom-control-sm,
 .input-group-sm {
   &.custom-file,
+  &.form-file,
   .custom-file-input,
   .custom-file-label {
     font-size: $b-custom-file-font-size-sm;

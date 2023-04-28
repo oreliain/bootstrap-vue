@@ -112,7 +112,7 @@ export const BVTooltipTemplate = /*#__PURE__*/ extend({
         },
         [
           h('div', {
-            staticClass: 'arrow',
+            staticClass: 'tooltip-arrow',
             ref: 'arrow'
           }),
           h(

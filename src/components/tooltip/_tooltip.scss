@@ -19,13 +19,15 @@
     pointer-events: none;
   }
 
-  .arrow {
+  .arrow,
+  .tooltip-arrow {
     margin: 0 $tooltip-border-radius;
   }
 
   &.bs-tooltip-right,
   &.bs-tooltip-left {
-    .arrow {
+    .arrow,
+    .tooltip-arrow {
       margin: $tooltip-border-radius 0;
     }
   }
@@ -39,25 +41,30 @@
       $tip-text-color: color-contrast($tip-bg-color);
 
       &.bs-tooltip-top {
-        .arrow::before {
+        .arrow::before,
+        .tooltip-arrow::before {
           border-top-color: $tip-bg-color;
         }
       }
 
       &.bs-tooltip-right {
-        .arrow::before {
+        .arrow::before,
+        .tooltip-arrow::before {
           border-right-color: $tip-bg-color;
         }
       }
 
       &.bs-tooltip-bottom {
-        .arrow::before {
+        .arrow::before,
+        ,
+        .tooltip-arrow::before {
           border-bottom-color: $tip-bg-color;
         }
       }
 
       &.bs-tooltip-left {
-        .arrow::before {
+        .arrow::before,
+        .tooltip-arrow::before {
           border-left-color: $tip-bg-color;
         }
       }

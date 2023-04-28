@@ -41,7 +41,8 @@ input[type="color"].form-control:disabled {
 
 // --- Base `.input-group > .custom-range` styling (no PR yet on Bootstrap v4) ---
 .input-group {
-  > .custom-range {
+  > .custom-range,
+  > .form-range {
     position: relative;
     flex: 1 1 auto;
     width: 1%;
@@ -50,8 +51,11 @@ input[type="color"].form-control:disabled {
     + .form-control,
     + .form-control-plaintext,
     + .custom-select,
+    + .form-select,
     + .custom-range,
-    + .custom-file {
+    + .form-range,
+    + .custom-file,
+    + .form-file {
       margin-left: -$input-border-width;
     }
   }
@@ -59,18 +63,24 @@ input[type="color"].form-control:disabled {
   > .form-control,
   > .form-control-plaintext,
   > .custom-select,
+  > .form-select,
   > .custom-range,
-  > .custom-file {
-    + .custom-range {
+  > .form-range,
+  > .custom-file,
+  > .form-file {
+    + .custom-range,
+    + .form-range {
       margin-left: -$input-border-width;
     }
   }
 
-  > .custom-range:focus {
+  > .custom-range:focus,
+  > .form-range:focus {
     z-index: 3;
   }
 
-  > .custom-range {
+  > .custom-range,
+  > .form-range {
     &:not(:last-child) {
       @include border-right-radius(0);
     }
@@ -79,7 +89,8 @@ input[type="color"].form-control:disabled {
     }
   }
 
-  > .custom-range {
+  > .custom-range,
+  > .form-range {
     height: $input-height;
     padding: 0 $input-padding-x;
     background-color: $input-bg;
@@ -117,13 +128,15 @@ input[type="color"].form-control:disabled {
   }
 }
 
-.input-group-lg > .custom-range {
+.input-group-lg > .custom-range,
+.input-group-lg > .form-range {
   height: $input-height-lg;
   padding: 0 $input-padding-x-lg;
   @include border-radius($input-border-radius-lg);
 }
 
-.input-group-sm > .custom-range {
+.input-group-sm > .custom-range,
+.input-group-sm > .form-range {
   height: $input-height-sm;
   padding: 0 $input-padding-x-sm;
   @include border-radius($input-border-radius-sm);
@@ -132,7 +145,8 @@ input[type="color"].form-control:disabled {
 // --- <b-form-input>: custom-range validation styling - valid (no PR yet for Bootstrap v4.2) ---
 // Mixin for generating `.input-group .custom-range` validation styling
 @mixin bv-custom-range-validation-state($state, $color) {
-  .input-group .custom-range {
+  .input-group .custom-range,
+  .input-group .form-range {
     .was-validated &:#{$state},
     &.is-#{$state} {
       border-color: $color;
@@ -144,7 +158,8 @@ input[type="color"].form-control:disabled {
     }
   }
 
-  .custom-range {
+  .custom-range,
+  .form-range {
     .was-validated &:#{$state},
     &.is-#{$state} {
       // Pseudo-elements must be split across multiple rulesets to have an affect

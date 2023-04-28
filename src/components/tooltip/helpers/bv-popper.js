@@ -104,6 +104,7 @@ export const BVPopper = /*#__PURE__*/ extend({
     popperConfig() {
       const { placement } = this
       return {
+        strategy: 'fixed',
         placement: this.getAttachment(placement),
         modifiers: [
           {
@@ -119,7 +120,7 @@ export const BVPopper = /*#__PURE__*/ extend({
           {
             name: 'arrow',
             enabled: true,
-            options: { element: '.arrow' }
+            options: { element: '.tooltip-arrow' }
           },
           {
             name: 'preventOverflow',
@@ -201,7 +202,7 @@ export const BVPopper = /*#__PURE__*/ extend({
     getOffset(placement) {
       if (!this.offset) {
         // Could set a ref for the arrow element
-        const arrow = this.$refs.arrow || select('.arrow', this.$el)
+        const arrow = this.$refs.arrow || select('.tooltip-arrow', this.$el)
         const arrowOffset = toFloat(getCS(arrow).width, 0) + toFloat(this.arrowPadding, 0)
         switch (OffsetMap[String(placement).toUpperCase()] || 0) {
           /* istanbul ignore next: can't test in JSDOM */

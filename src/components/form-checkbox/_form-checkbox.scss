@@ -47,7 +47,9 @@
 }
 
 .custom-switch.b-custom-control-lg,
-.input-group-lg .custom-switch {
+.form-switch.b-custom-control-lg,
+.input-group-lg .custom-switch,
+.input-group-lg .form-switch {
   padding-left: $b-custom-switch-width-lg + $b-custom-control-gutter-lg;
 
   .custom-control-label {
@@ -86,7 +88,9 @@
 }
 
 .custom-switch.b-custom-control-sm,
-.input-group-sm .custom-switch {
+.form-switch.b-custom-control-sm,
+.input-group-sm .custom-switch,
+.input-group-sm .form-switch {
   padding-left: $b-custom-switch-width-sm + $b-custom-control-gutter-sm;
 
   .custom-control-label {

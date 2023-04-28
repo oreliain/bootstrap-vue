@@ -81,6 +81,7 @@ export const formTextMixin = extend({
         {
           // Range input needs class `custom-range`
           'custom-range': isRange,
+          'form-range': isRange,
           // `plaintext` not supported by `type="range"` or `type="color"`
           'form-control-plaintext': plaintext && !isRange && !isColor,
           // `form-control` not used by `type="range"` or `plaintext`

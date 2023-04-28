@@ -558,7 +558,7 @@ export const BFormFile = /*#__PURE__*/ extend({
     return h(
       'div',
       {
-        staticClass: 'custom-file b-form-file',
+        staticClass: 'custom-file form-file b-form-file',
         class: [{ [`b-custom-control-${size}`]: size }, stateClass, bvAttrs.class],
         style: bvAttrs.style,
         attrs: { id: this.safeId('_BV_file_outer_') },

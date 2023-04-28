@@ -78,6 +78,7 @@ export const BFormSelect = /*#__PURE__*/ extend({
     inputClass() {
       return [
         this.plain ? 'form-control' : 'custom-select',
+        this.plain ? 'form-control' : 'form-select',
         this.size && this.plain ? `form-control-${this.size}` : null,
         this.size && !this.plain ? `custom-select-${this.size}` : null,
         this.stateClass

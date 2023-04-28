@@ -258,7 +258,7 @@ export const formRadioCheckMixin = extend({
     const $input = h('input', {
       class: [
         {
-          'form-check-input': isPlain,
+          'form-check-input': true,
           'custom-control-input': isCustom,
           // https://github.com/bootstrap-vue/bootstrap-vue/issues/2911
           'position-static': isPlain && !$content
@@ -298,8 +298,8 @@ export const formRadioCheckMixin = extend({
         'label',
         {
           class: {
-            'form-check-label': isPlain,
-            'custom-control-label': isCustom
+            'form-check-label': true,
+            'form-label': true
           },
           attrs: { for: this.safeId() }
         },
@@ -312,12 +312,13 @@ export const formRadioCheckMixin = extend({
       {
         class: [
           {
-            'form-check': isPlain,
+            'form-check': isPlain || (isCustom && (isRadio || !isSwitch)) || isSwitch,
             'form-check-inline': isPlain && isInline,
             'custom-control': isCustom,
             'custom-control-inline': isCustom && isInline,
             'custom-checkbox': isCustom && !isRadio && !isSwitch,
             'custom-switch': isSwitch,
+            'form-switch': isSwitch,
             'custom-radio': isCustom && isRadio,
             // Temporary until Bootstrap v4 supports sizing (most likely in V5)
             [`b-custom-control-${computedSize}`]: computedSize && !isBtnMode

@@ -210,7 +210,7 @@ export const dropdownMixin = extend({
 
       // Only instantiate Popper.js when dropdown is not in `<b-navbar>`
       if (!this.inNavbar) {
-        if (typeof Popper === 'undefined') {
+        if (typeof createPopper === 'undefined') {
           /* istanbul ignore next */
           warn('Popper.js not found. Falling back to CSS positioning', NAME_DROPDOWN)
         } else {
@@ -276,14 +276,19 @@ export const dropdownMixin = extend({
       }
       const popperConfig = {
         placement,
-        modifiers: {
-          offset: { offset: this.offset || 0 },
-          flip: { enabled: !this.noFlip }
-        }
+        strategy: 'fixed',
+        modifiers: [
+          { name: 'offset', options: { offset: this.offset || 0 } },
+          { name: 'flip', enabled: !this.noFlip }
+        ]
       }
       const boundariesElement = this.boundary
       if (boundariesElement) {
-        popperConfig.modifiers.preventOverflow = { boundariesElement }
+        popperConfig.modifiers.push({
+          name: 'preventOverflow',
+          enabled: true,
+          options: { boundary: boundariesElement }
+        })
       }
       return mergeDeep(popperConfig, this.popperOpts || {})
     },
