@@ -9943,7 +9943,7 @@
 
 
         if (!this.inNavbar) {
-          if (typeof Popper === 'undefined') {
+          if (typeof createPopper === 'undefined') {
             /* istanbul ignore next */
             warn('Popper.js not found. Falling back to CSS positioning', NAME_DROPDOWN);
           } else {
@@ -10010,21 +10010,27 @@
 
         var popperConfig = {
           placement: placement,
-          modifiers: {
-            offset: {
+          strategy: 'fixed',
+          modifiers: [{
+            name: 'offset',
+            options: {
               offset: this.offset || 0
-            },
-            flip: {
-              enabled: !this.noFlip
             }
-          }
+          }, {
+            name: 'flip',
+            enabled: !this.noFlip
+          }]
         };
         var boundariesElement = this.boundary;
 
         if (boundariesElement) {
-          popperConfig.modifiers.preventOverflow = {
-            boundariesElement: boundariesElement
-          };
+          popperConfig.modifiers.push({
+            name: 'preventOverflow',
+            enabled: true,
+            options: {
+              boundary: boundariesElement
+            }
+          });
         }
 
         return mergeDeep(popperConfig, this.popperOpts || {});
@@ -11364,7 +11370,7 @@
       var $content = this.normalizeSlot();
       var $input = h('input', {
         class: [{
-          'form-check-input': isPlain,
+          'form-check-input': true,
           'custom-control-input': isCustom,
           // https://github.com/bootstrap-vue/bootstrap-vue/issues/2911
           'position-static': isPlain && !$content
@@ -11411,8 +11417,8 @@
       if (!(isPlain && !$content)) {
         $label = h('label', {
           class: {
-            'form-check-label': isPlain,
-            'custom-control-label': isCustom
+            'form-check-label': true,
+            'form-label': true
           },
           attrs: {
             for: this.safeId()
@@ -11422,12 +11428,13 @@
 
       return h('div', {
         class: [_defineProperty({
-          'form-check': isPlain,
+          'form-check': isPlain || isCustom && (isRadio || !isSwitch) || isSwitch,
           'form-check-inline': isPlain && isInline,
           'custom-control': isCustom,
           'custom-control-inline': isCustom && isInline,
           'custom-checkbox': isCustom && !isRadio && !isSwitch,
           'custom-switch': isSwitch,
+          'form-switch': isSwitch,
           'custom-radio': isCustom && isRadio
         }, "b-custom-control-".concat(computedSize), computedSize && !isBtnMode), bvAttrs.class],
         style: bvAttrs.style
@@ -12812,7 +12819,7 @@
       }, [this.labelContent])]); // Return rendered custom file input
 
       return h('div', {
-        staticClass: 'custom-file b-form-file',
+        staticClass: 'custom-file form-file b-form-file',
         class: [_defineProperty({}, "b-custom-control-".concat(size), size), stateClass, bvAttrs.class],
         style: bvAttrs.style,
         attrs: {
@@ -13471,6 +13478,7 @@
         return [{
           // Range input needs class `custom-range`
           'custom-range': isRange,
+          'form-range': isRange,
           // `plaintext` not supported by `type="range"` or `type="color"`
           'form-control-plaintext': plaintext && !isRange && !isColor,
           // `form-control` not used by `type="range"` or `plaintext`
@@ -14404,7 +14412,7 @@
         return !this.plain && this.selectSize === 0 ? null : this.selectSize;
       },
       inputClass: function inputClass() {
-        return [this.plain ? 'form-control' : 'custom-select', this.size && this.plain ? "form-control-".concat(this.size) : null, this.size && !this.plain ? "custom-select-".concat(this.size) : null, this.stateClass];
+        return [this.plain ? 'form-control' : 'custom-select', this.plain ? 'form-control' : 'form-select', this.size && this.plain ? "form-control-".concat(this.size) : null, this.size && !this.plain ? "custom-select-".concat(this.size) : null, this.stateClass];
       }
     },
     watch: {
@@ -21156,6 +21164,7 @@
 
         var placement = this.placement;
         return {
+          strategy: 'fixed',
           placement: this.getAttachment(placement),
           modifiers: [{
             name: 'offset',
@@ -21173,7 +21182,7 @@
             name: 'arrow',
             enabled: true,
             options: {
-              element: '.arrow'
+              element: '.tooltip-arrow'
             }
           }, {
             name: 'preventOverflow',
@@ -21258,7 +21267,7 @@
       getOffset: function getOffset(placement) {
         if (!this.offset) {
           // Could set a ref for the arrow element
-          var arrow = this.$refs.arrow || select('.arrow', this.$el);
+          var arrow = this.$refs.arrow || select('.tooltip-arrow', this.$el);
           var arrowOffset = toFloat(getCS(arrow).width, 0) + toFloat(this.arrowPadding, 0);
 
           switch (OffsetMap[String(placement).toUpperCase()] || 0) {
@@ -21427,7 +21436,7 @@
           attrs: this.templateAttributes,
           on: this.templateListeners
         }, [h('div', {
-          staticClass: 'arrow',
+          staticClass: 'tooltip-arrow',
           ref: 'arrow'
         }), h('div', {
           staticClass: 'tooltip-inner',
@@ -22680,7 +22689,7 @@
           attrs: this.templateAttributes,
           on: this.templateListeners
         }, [h('div', {
-          staticClass: 'arrow',
+          staticClass: 'arrow tooltip-arrow',
           ref: 'arrow'
         }), isUndefinedOrNull($title) || $title === '' ?
         /* istanbul ignore next */

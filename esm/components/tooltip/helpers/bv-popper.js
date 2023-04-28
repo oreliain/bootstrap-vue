@@ -88,6 +88,7 @@ export var BVPopper = /*#__PURE__*/extend({
 
       var placement = this.placement;
       return {
+        strategy: 'fixed',
         placement: this.getAttachment(placement),
         modifiers: [{
           name: 'offset',
@@ -105,7 +106,7 @@ export var BVPopper = /*#__PURE__*/extend({
           name: 'arrow',
           enabled: true,
           options: {
-            element: '.arrow'
+            element: '.tooltip-arrow'
           }
         }, {
           name: 'preventOverflow',
@@ -190,7 +191,7 @@ export var BVPopper = /*#__PURE__*/extend({
     getOffset: function getOffset(placement) {
       if (!this.offset) {
         // Could set a ref for the arrow element
-        var arrow = this.$refs.arrow || select('.arrow', this.$el);
+        var arrow = this.$refs.arrow || select('.tooltip-arrow', this.$el);
         var arrowOffset = toFloat(getCS(arrow).width, 0) + toFloat(this.arrowPadding, 0);
 
         switch (OffsetMap[String(placement).toUpperCase()] || 0) {

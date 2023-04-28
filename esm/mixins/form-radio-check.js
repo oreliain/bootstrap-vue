@@ -215,7 +215,7 @@ export var formRadioCheckMixin = extend({
     var $content = this.normalizeSlot();
     var $input = h('input', {
       class: [{
-        'form-check-input': isPlain,
+        'form-check-input': true,
         'custom-control-input': isCustom,
         // https://github.com/bootstrap-vue/bootstrap-vue/issues/2911
         'position-static': isPlain && !$content
@@ -262,8 +262,8 @@ export var formRadioCheckMixin = extend({
     if (!(isPlain && !$content)) {
       $label = h('label', {
         class: {
-          'form-check-label': isPlain,
-          'custom-control-label': isCustom
+          'form-check-label': true,
+          'form-label': true
         },
         attrs: {
           for: this.safeId()
@@ -273,12 +273,13 @@ export var formRadioCheckMixin = extend({
 
     return h('div', {
       class: [_defineProperty({
-        'form-check': isPlain,
+        'form-check': isPlain || isCustom && (isRadio || !isSwitch) || isSwitch,
         'form-check-inline': isPlain && isInline,
         'custom-control': isCustom,
         'custom-control-inline': isCustom && isInline,
         'custom-checkbox': isCustom && !isRadio && !isSwitch,
         'custom-switch': isSwitch,
+        'form-switch': isSwitch,
         'custom-radio': isCustom && isRadio
       }, "b-custom-control-".concat(computedSize), computedSize && !isBtnMode), bvAttrs.class],
       style: bvAttrs.style

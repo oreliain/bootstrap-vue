@@ -566,7 +566,7 @@ export var BFormFile = /*#__PURE__*/extend({
     }, [this.labelContent])]); // Return rendered custom file input
 
     return h('div', {
-      staticClass: 'custom-file b-form-file',
+      staticClass: 'custom-file form-file b-form-file',
       class: [_defineProperty({}, "b-custom-control-".concat(size), size), stateClass, bvAttrs.class],
       style: bvAttrs.style,
       attrs: {

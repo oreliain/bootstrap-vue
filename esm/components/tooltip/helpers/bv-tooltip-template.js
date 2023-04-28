@@ -104,7 +104,7 @@ export var BVTooltipTemplate = /*#__PURE__*/extend({
         attrs: this.templateAttributes,
         on: this.templateListeners
       }, [h('div', {
-        staticClass: 'arrow',
+        staticClass: 'tooltip-arrow',
         ref: 'arrow'
       }), h('div', {
         staticClass: 'tooltip-inner',

@@ -202,7 +202,7 @@ export var dropdownMixin = extend({
 
 
       if (!this.inNavbar) {
-        if (typeof Popper === 'undefined') {
+        if (typeof _createPopper === 'undefined') {
           /* istanbul ignore next */
           warn('Popper.js not found. Falling back to CSS positioning', NAME_DROPDOWN);
         } else {
@@ -269,21 +269,27 @@ export var dropdownMixin = extend({
 
       var popperConfig = {
         placement: placement,
-        modifiers: {
-          offset: {
+        strategy: 'fixed',
+        modifiers: [{
+          name: 'offset',
+          options: {
             offset: this.offset || 0
-          },
-          flip: {
-            enabled: !this.noFlip
           }
-        }
+        }, {
+          name: 'flip',
+          enabled: !this.noFlip
+        }]
       };
       var boundariesElement = this.boundary;
 
       if (boundariesElement) {
-        popperConfig.modifiers.preventOverflow = {
-          boundariesElement: boundariesElement
-        };
+        popperConfig.modifiers.push({
+          name: 'preventOverflow',
+          enabled: true,
+          options: {
+            boundary: boundariesElement
+          }
+        });
       }
 
       return mergeDeep(popperConfig, this.popperOpts || {});
