@@ -103,8 +103,9 @@ export const BVPopper = /*#__PURE__*/ extend({
     },
     popperConfig() {
       const { placement } = this
+      console.log(this.getOffset(placement))
       return {
-        strategy: 'fixed',
+        // strategy: 'fixed',
         placement: this.getAttachment(placement),
         modifiers: [
           {
@@ -199,23 +200,27 @@ export const BVPopper = /*#__PURE__*/ extend({
     getAttachment(placement) {
       return AttachmentMap[String(placement).toUpperCase()] || 'auto'
     },
+    computeOffset(arrowOffset, offsetType) {
+      return popperConfig => {
+        if (offsetType !== -1 && offsetType !== 1) {
+          return 0
+        }
+        const popperWidth = (popperConfig?.popper?.width || 0) / 2
+        return [
+          popperWidth * offsetType - offsetType * arrowOffset,
+          popperWidth * offsetType - offsetType * arrowOffset
+        ]
+      }
+    },
     getOffset(placement) {
       if (!this.offset) {
         // Could set a ref for the arrow element
-        const arrow = this.$refs.arrow || select('.tooltip-arrow', this.$el)
+        const arrow =
+          this.$refs.arrow ||
+          select('.tooltip-arrow', this.$el) ||
+          select('.popover-arrow', this.$el)
         const arrowOffset = toFloat(getCS(arrow).width, 0) + toFloat(this.arrowPadding, 0)
-        switch (OffsetMap[String(placement).toUpperCase()] || 0) {
-          /* istanbul ignore next: can't test in JSDOM */
-          case +1:
-            /* istanbul ignore next: can't test in JSDOM */
-            return `+50%p - ${arrowOffset}px`
-          /* istanbul ignore next: can't test in JSDOM */
-          case -1:
-            /* istanbul ignore next: can't test in JSDOM */
-            return `-50%p + ${arrowOffset}px`
-          default:
-            return 0
-        }
+        return this.computeOffset(arrowOffset, OffsetMap[String(placement).toUpperCase()] || 0)
       }
       /* istanbul ignore next */
       return this.offset

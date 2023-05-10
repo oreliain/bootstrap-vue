@@ -33,7 +33,7 @@
 
       &.bs-popover-top {
         > .arrow,
-        > .tooltip-arrow {
+        > .popover-arrow {
           &::before {
             border-top-color: $po-arrow-outer-color;
           }
@@ -46,7 +46,7 @@
 
       &.bs-popover-right {
         > .arrow,
-        > .tooltip-arrow {
+        > .popover-arrow {
           &::before {
             border-right-color: $po-arrow-outer-color;
           }
@@ -59,7 +59,7 @@
 
       &.bs-popover-bottom {
         > .arrow,
-        > .tooltip-arrow {
+        > .popover-arrow {
           &::before {
             border-bottom-color: $po-arrow-outer-color;
           }
@@ -77,7 +77,7 @@
 
       &.bs-popover-left {
         > .arrow,
-        > .tooltip-arrow {
+        > .popover-arrow {
           &::before {
             border-left-color: $po-arrow-outer-color;
           }

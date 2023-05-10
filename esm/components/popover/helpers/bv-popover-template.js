@@ -31,7 +31,7 @@ export var BVPopoverTemplate = /*#__PURE__*/extend({
         attrs: this.templateAttributes,
         on: this.templateListeners
       }, [h('div', {
-        staticClass: 'arrow tooltip-arrow',
+        staticClass: 'arrow popover-arrow',
         ref: 'arrow'
       }), isUndefinedOrNull($title) || $title === '' ?
       /* istanbul ignore next */

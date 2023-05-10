@@ -39,6 +39,7 @@ export var BBadge = /*#__PURE__*/extend({
       staticClass: 'badge',
       class: ["badge-".concat(variant), {
         'badge-pill': props.pill,
+        'rounded-pill': props.pill,
         active: active,
         disabled: disabled
       }],

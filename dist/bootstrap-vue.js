@@ -1,5 +1,5 @@
 /*!
- * BootstrapVue 2.23.1
+ * BootstrapVue 2.23.2
  *
  * @link https://bootstrap-vue.org
  * @source https://github.com/bootstrap-vue/bootstrap-vue
@@ -3896,6 +3896,7 @@
         staticClass: 'badge',
         class: ["badge-".concat(variant), {
           'badge-pill': props.pill,
+          'rounded-pill': props.pill,
           active: active,
           disabled: disabled
         }],
@@ -16990,6 +16991,63 @@
   });
 
   var props$15 = makePropsConfigurable({
+    append: makeProp(PROP_TYPE_STRING),
+    appendHtml: makeProp(PROP_TYPE_STRING),
+    id: makeProp(PROP_TYPE_STRING),
+    prepend: makeProp(PROP_TYPE_STRING),
+    prependHtml: makeProp(PROP_TYPE_STRING),
+    size: makeProp(PROP_TYPE_STRING),
+    tag: makeProp(PROP_TYPE_STRING, 'div')
+  }, NAME_INPUT_GROUP); // --- Main component ---
+  // @vue/component
+
+  var BInputGroup = /*#__PURE__*/extend({
+    name: NAME_INPUT_GROUP,
+    functional: true,
+    props: props$15,
+    render: function render(h, _ref) {
+      var props = _ref.props,
+          data = _ref.data,
+          slots = _ref.slots,
+          scopedSlots = _ref.scopedSlots;
+      var prepend = props.prepend,
+          prependHtml = props.prependHtml,
+          append = props.append,
+          appendHtml = props.appendHtml,
+          size = props.size;
+      var $scopedSlots = scopedSlots || {};
+      var $slots = slots();
+      var slotScope = {};
+      var $prepend = h();
+      var hasPrependSlot = hasNormalizedSlot(SLOT_NAME_PREPEND, $scopedSlots, $slots);
+
+      if (hasPrependSlot || prepend || prependHtml) {
+        $prepend = hasPrependSlot ? normalizeSlot(SLOT_NAME_PREPEND, slotScope, $scopedSlots, $slots) : h(BInputGroupText, {
+          domProps: htmlOrText(prependHtml, prepend)
+        });
+      }
+
+      var $append = h();
+      var hasAppendSlot = hasNormalizedSlot(SLOT_NAME_APPEND, $scopedSlots, $slots);
+
+      if (hasAppendSlot || append || appendHtml) {
+        $append = hasAppendSlot ? normalizeSlot(SLOT_NAME_APPEND, slotScope, $scopedSlots, $slots) : h(BInputGroupText, {
+          domProps: htmlOrText(appendHtml, append)
+        });
+      }
+
+      return h(props.tag, a(data, {
+        staticClass: 'input-group',
+        class: _defineProperty({}, "input-group-".concat(size), size),
+        attrs: {
+          id: props.id || null,
+          role: 'group'
+        }
+      }), [$prepend, normalizeSlot(SLOT_NAME_DEFAULT, slotScope, $scopedSlots, $slots), $append]);
+    }
+  });
+
+  var props$14 = makePropsConfigurable({
     append: makeProp(PROP_TYPE_BOOLEAN, false),
     id: makeProp(PROP_TYPE_STRING),
     isText: makeProp(PROP_TYPE_BOOLEAN, false),
@@ -17000,7 +17058,7 @@
   var BInputGroupAddon = /*#__PURE__*/extend({
     name: NAME_INPUT_GROUP_ADDON,
     functional: true,
-    props: props$15,
+    props: props$14,
     render: function render(h, _ref) {
       var props = _ref.props,
           data = _ref.data,
@@ -17018,27 +17076,7 @@
     }
   });
 
-  var props$14 = makePropsConfigurable(omit(props$15, ['append']), NAME_INPUT_GROUP_APPEND); // --- Main component ---
-  // @vue/component
-
-  var BInputGroupAppend = /*#__PURE__*/extend({
-    name: NAME_INPUT_GROUP_APPEND,
-    functional: true,
-    props: props$14,
-    render: function render(h, _ref) {
-      var props = _ref.props,
-          data = _ref.data,
-          children = _ref.children;
-      // Pass all our data down to child, and set `append` to `true`
-      return h(BInputGroupAddon, a(data, {
-        props: _objectSpread2$3(_objectSpread2$3({}, props), {}, {
-          append: true
-        })
-      }), children);
-    }
-  });
-
-  var props$13 = makePropsConfigurable(omit(props$15, ['append']), NAME_INPUT_GROUP_PREPEND); // --- Main component ---
+  var props$13 = makePropsConfigurable(omit(props$14, ['append']), NAME_INPUT_GROUP_PREPEND); // --- Main component ---
   // @vue/component
 
   var BInputGroupPrepend = /*#__PURE__*/extend({
@@ -17058,60 +17096,23 @@
     }
   });
 
-  var props$12 = makePropsConfigurable({
-    append: makeProp(PROP_TYPE_STRING),
-    appendHtml: makeProp(PROP_TYPE_STRING),
-    id: makeProp(PROP_TYPE_STRING),
-    prepend: makeProp(PROP_TYPE_STRING),
-    prependHtml: makeProp(PROP_TYPE_STRING),
-    size: makeProp(PROP_TYPE_STRING),
-    tag: makeProp(PROP_TYPE_STRING, 'div')
-  }, NAME_INPUT_GROUP); // --- Main component ---
+  var props$12 = makePropsConfigurable(omit(props$14, ['append']), NAME_INPUT_GROUP_APPEND); // --- Main component ---
   // @vue/component
 
-  var BInputGroup = /*#__PURE__*/extend({
-    name: NAME_INPUT_GROUP,
+  var BInputGroupAppend = /*#__PURE__*/extend({
+    name: NAME_INPUT_GROUP_APPEND,
     functional: true,
     props: props$12,
     render: function render(h, _ref) {
       var props = _ref.props,
           data = _ref.data,
-          slots = _ref.slots,
-          scopedSlots = _ref.scopedSlots;
-      var prepend = props.prepend,
-          prependHtml = props.prependHtml,
-          append = props.append,
-          appendHtml = props.appendHtml,
-          size = props.size;
-      var $scopedSlots = scopedSlots || {};
-      var $slots = slots();
-      var slotScope = {};
-      var $prepend = h();
-      var hasPrependSlot = hasNormalizedSlot(SLOT_NAME_PREPEND, $scopedSlots, $slots);
-
-      if (hasPrependSlot || prepend || prependHtml) {
-        $prepend = h(BInputGroupPrepend, [hasPrependSlot ? normalizeSlot(SLOT_NAME_PREPEND, slotScope, $scopedSlots, $slots) : h(BInputGroupText, {
-          domProps: htmlOrText(prependHtml, prepend)
-        })]);
-      }
-
-      var $append = h();
-      var hasAppendSlot = hasNormalizedSlot(SLOT_NAME_APPEND, $scopedSlots, $slots);
-
-      if (hasAppendSlot || append || appendHtml) {
-        $append = h(BInputGroupAppend, [hasAppendSlot ? normalizeSlot(SLOT_NAME_APPEND, slotScope, $scopedSlots, $slots) : h(BInputGroupText, {
-          domProps: htmlOrText(appendHtml, append)
-        })]);
-      }
-
-      return h(props.tag, a(data, {
-        staticClass: 'input-group',
-        class: _defineProperty({}, "input-group-".concat(size), size),
-        attrs: {
-          id: props.id || null,
-          role: 'group'
-        }
-      }), [$prepend, normalizeSlot(SLOT_NAME_DEFAULT, slotScope, $scopedSlots, $slots), $append]);
+          children = _ref.children;
+      // Pass all our data down to child, and set `append` to `true`
+      return h(BInputGroupAddon, a(data, {
+        props: _objectSpread2$3(_objectSpread2$3({}, props), {}, {
+          append: true
+        })
+      }), children);
     }
   });
 
@@ -21163,8 +21164,9 @@
         var _this = this;
 
         var placement = this.placement;
+        console.log(this.getOffset(placement));
         return {
-          strategy: 'fixed',
+          // strategy: 'fixed',
           placement: this.getAttachment(placement),
           modifiers: [{
             name: 'offset',
@@ -21264,27 +21266,24 @@
       getAttachment: function getAttachment(placement) {
         return AttachmentMap[String(placement).toUpperCase()] || 'auto';
       },
+      computeOffset: function computeOffset(arrowOffset, offsetType) {
+        return function (popperConfig) {
+          var _popperConfig$popper;
+
+          if (offsetType !== -1 && offsetType !== 1) {
+            return 0;
+          }
+
+          var popperWidth = ((popperConfig === null || popperConfig === void 0 ? void 0 : (_popperConfig$popper = popperConfig.popper) === null || _popperConfig$popper === void 0 ? void 0 : _popperConfig$popper.width) || 0) / 2;
+          return [popperWidth * offsetType - offsetType * arrowOffset, popperWidth * offsetType - offsetType * arrowOffset];
+        };
+      },
       getOffset: function getOffset(placement) {
         if (!this.offset) {
           // Could set a ref for the arrow element
-          var arrow = this.$refs.arrow || select('.tooltip-arrow', this.$el);
+          var arrow = this.$refs.arrow || select('.tooltip-arrow', this.$el) || select('.popover-arrow', this.$el);
           var arrowOffset = toFloat(getCS(arrow).width, 0) + toFloat(this.arrowPadding, 0);
-
-          switch (OffsetMap[String(placement).toUpperCase()] || 0) {
-            /* istanbul ignore next: can't test in JSDOM */
-            case +1:
-              /* istanbul ignore next: can't test in JSDOM */
-              return "+50%p - ".concat(arrowOffset, "px");
-
-            /* istanbul ignore next: can't test in JSDOM */
-
-            case -1:
-              /* istanbul ignore next: can't test in JSDOM */
-              return "-50%p + ".concat(arrowOffset, "px");
-
-            default:
-              return 0;
-          }
+          return this.computeOffset(arrowOffset, OffsetMap[String(placement).toUpperCase()] || 0);
         }
         /* istanbul ignore next */
 
@@ -22689,7 +22688,7 @@
           attrs: this.templateAttributes,
           on: this.templateListeners
         }, [h('div', {
-          staticClass: 'arrow tooltip-arrow',
+          staticClass: 'arrow popover-arrow',
           ref: 'arrow'
         }), isUndefinedOrNull($title) || $title === '' ?
         /* istanbul ignore next */

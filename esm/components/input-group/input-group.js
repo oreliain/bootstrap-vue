@@ -7,8 +7,6 @@ import { SLOT_NAME_APPEND, SLOT_NAME_DEFAULT, SLOT_NAME_PREPEND } from '../../co
 import { htmlOrText } from '../../utils/html';
 import { hasNormalizedSlot, normalizeSlot } from '../../utils/normalize-slot';
 import { makeProp, makePropsConfigurable } from '../../utils/props';
-import { BInputGroupAppend } from './input-group-append';
-import { BInputGroupPrepend } from './input-group-prepend';
 import { BInputGroupText } from './input-group-text'; // --- Props ---
 
 export var props = makePropsConfigurable({
@@ -43,18 +41,18 @@ export var BInputGroup = /*#__PURE__*/extend({
     var hasPrependSlot = hasNormalizedSlot(SLOT_NAME_PREPEND, $scopedSlots, $slots);
 
     if (hasPrependSlot || prepend || prependHtml) {
-      $prepend = h(BInputGroupPrepend, [hasPrependSlot ? normalizeSlot(SLOT_NAME_PREPEND, slotScope, $scopedSlots, $slots) : h(BInputGroupText, {
+      $prepend = hasPrependSlot ? normalizeSlot(SLOT_NAME_PREPEND, slotScope, $scopedSlots, $slots) : h(BInputGroupText, {
         domProps: htmlOrText(prependHtml, prepend)
-      })]);
+      });
     }
 
     var $append = h();
     var hasAppendSlot = hasNormalizedSlot(SLOT_NAME_APPEND, $scopedSlots, $slots);
 
     if (hasAppendSlot || append || appendHtml) {
-      $append = h(BInputGroupAppend, [hasAppendSlot ? normalizeSlot(SLOT_NAME_APPEND, slotScope, $scopedSlots, $slots) : h(BInputGroupText, {
+      $append = hasAppendSlot ? normalizeSlot(SLOT_NAME_APPEND, slotScope, $scopedSlots, $slots) : h(BInputGroupText, {
         domProps: htmlOrText(appendHtml, append)
-      })]);
+      });
     }
 
     return h(props.tag, mergeData(data, {

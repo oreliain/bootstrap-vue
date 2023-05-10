@@ -43,6 +43,7 @@ export const BBadge = /*#__PURE__*/ extend({
           `badge-${variant}`,
           {
             'badge-pill': props.pill,
+            'rounded-pill': props.pill,
             active,
             disabled
           }

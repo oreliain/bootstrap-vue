@@ -87,8 +87,9 @@ export var BVPopper = /*#__PURE__*/extend({
       var _this = this;
 
       var placement = this.placement;
+      console.log(this.getOffset(placement));
       return {
-        strategy: 'fixed',
+        // strategy: 'fixed',
         placement: this.getAttachment(placement),
         modifiers: [{
           name: 'offset',
@@ -188,27 +189,24 @@ export var BVPopper = /*#__PURE__*/extend({
     getAttachment: function getAttachment(placement) {
       return AttachmentMap[String(placement).toUpperCase()] || 'auto';
     },
+    computeOffset: function computeOffset(arrowOffset, offsetType) {
+      return function (popperConfig) {
+        var _popperConfig$popper;
+
+        if (offsetType !== -1 && offsetType !== 1) {
+          return 0;
+        }
+
+        var popperWidth = ((popperConfig === null || popperConfig === void 0 ? void 0 : (_popperConfig$popper = popperConfig.popper) === null || _popperConfig$popper === void 0 ? void 0 : _popperConfig$popper.width) || 0) / 2;
+        return [popperWidth * offsetType - offsetType * arrowOffset, popperWidth * offsetType - offsetType * arrowOffset];
+      };
+    },
     getOffset: function getOffset(placement) {
       if (!this.offset) {
         // Could set a ref for the arrow element
-        var arrow = this.$refs.arrow || select('.tooltip-arrow', this.$el);
+        var arrow = this.$refs.arrow || select('.tooltip-arrow', this.$el) || select('.popover-arrow', this.$el);
         var arrowOffset = toFloat(getCS(arrow).width, 0) + toFloat(this.arrowPadding, 0);
-
-        switch (OffsetMap[String(placement).toUpperCase()] || 0) {
-          /* istanbul ignore next: can't test in JSDOM */
-          case +1:
-            /* istanbul ignore next: can't test in JSDOM */
-            return "+50%p - ".concat(arrowOffset, "px");
-
-          /* istanbul ignore next: can't test in JSDOM */
-
-          case -1:
-            /* istanbul ignore next: can't test in JSDOM */
-            return "-50%p + ".concat(arrowOffset, "px");
-
-          default:
-            return 0;
-        }
+        return this.computeOffset(arrowOffset, OffsetMap[String(placement).toUpperCase()] || 0);
       }
       /* istanbul ignore next */
 
